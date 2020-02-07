@@ -1,0 +1,85 @@
+# -*- coding: utf-8 -*-
+import sys
+from filtros import *
+
+def image(name):
+    # Read image
+    img = Image.open(name)
+    
+    # Output images
+    img.show()
+
+    # prints format of image
+    print(img.format)
+
+    # prints mode of image
+    print(img.mode)
+
+def menu(filtro, imagen, nueva):
+    foto = None
+    if (nombreFiltro == "filtroMicaRoja"):
+        foto = filtroMicaRoja(imagen, nueva)
+    elif (nombreFiltro == "filtroMicaVerde"):
+        foto = filtroMicaVerde(imagen, nueva)
+    elif (nombreFiltro == "filtroMicaAzul"):
+        foto = filtroMicaAzul(imagen, nueva)
+    elif (nombreFiltro == "filtroMicaMorada"):
+        foto = filtroMicaMorada(imagen, nueva)
+    elif (nombreFiltro == "filtroBrillo"):
+        brillo = input(
+            "Ingresa la cantidad de brillo (-128 <= brillo <= 128): \t")
+        foto = filtroBrillo(imagen, nueva, int(brillo))
+    elif (nombreFiltro == "filtroRuido"):
+        foto = filtroRuido(imagen, nueva)
+    elif (nombreFiltro == "filtroRandom"):
+        foto = filtroRandom(imagen, nueva)
+    elif (nombreFiltro == "filtroFormula"):
+        foto = filtroFormula(imagen, nueva)
+    elif (nombreFiltro == "filtroGrisRojo"):
+        foto = filtroGrisRojo(imagen, nueva)
+    elif (nombreFiltro == "filtroGrisVerde"):
+        foto = filtroGrisVerde(imagen, nueva)
+    elif (nombreFiltro == "filtroGrisAzul"):
+        foto = filtroGrisAzul(imagen, nueva)
+    elif (nombreFiltro == "filtroPromedio"):
+        foto = filtroPromedio(imagen, nueva)
+    elif (nombreFiltro == "filtroGrisRojoVerde"):
+        foto = filtroGrisRojoVerde(imagen, nueva)
+    elif (nombreFiltro == "filtroGrisRojoAzul"):
+        foto = filtroGrisRojoAzul(imagen, nueva)
+    elif (nombreFiltro == "filtroGrisVerdeAzul"):
+        foto = filtroGrisVerdeAzul(imagen, nueva)
+    elif (nombreFiltro == "filtroAltoContraste"):
+        foto = filtroAltoContraste(imagen, nueva)
+    elif (nombreFiltro == "filtroAltoContrasteInverso"):
+        foto = filtroAltoContrasteInverso(imagen, nueva)
+    else:
+        print("No es una opción valida")
+
+    return foto
+
+def save(yn):
+    if (yn == "Y"):
+        nombreFoto = input("Ingrese el nombre para la nueva imagen:\n")
+        foto.save(nombreFoto)
+
+    
+if __name__ == "__main__":
+    # perrito.jpg como default, arg[1] en otro caso
+    nombre = "perrito.jpg" if (len(sys.argv) < 2) else str(sys.argv[1])
+    imagen = Image.open(nombre)
+    nueva = Image.open(nombre)
+    flag = True
+    while flag:
+        # nombreFiltro = input("Ingrese el filtro deseado:\n")
+        nombreFiltro = "filtroRandom"
+        # show = input("¿Desea ver la imagen?[Y/n]\n")
+        show = "Y"
+        foto = menu(nombreFiltro, imagen, nueva)
+        if (show == "Y"):
+            foto.show()
+        # foto.show()
+        yn = input("¿Desea guardar la imagen?[Y/n]\n")
+        save(yn)
+        flag = input("¿Desea usar otro filtro?[Y/n]\n")
+        flag = not(flag == "n")
