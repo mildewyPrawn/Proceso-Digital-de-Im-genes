@@ -92,35 +92,8 @@ def filtroMinMaxProm(imagen, nueva):
             pixels[i,j] = (mmp,mmp,mmp)
     return nueva
 
-
-
-
-
-
-
-
-
-
-# Filtro de brillo
-def filtroBrillo(imagen, nueva, brillo):
-    if (-128 <= brillo and brillo <= 128 ):
-        rgb = imagen.convert('RGB')
-        pixels = nueva.load()
-        new = lambda x : 0 if (x < 0) else (255 if x > 255 else x)
-        for i in range(imagen.size[0]):
-            for j in range(imagen.size[1]):
-                r,g,b = rgb.getpixel((i,j))
-                r = new(r + brillo)
-                g = new(g + brillo)
-                b = new(b + brillo)
-                pixels[i,j] = (r,g,b)
-        return nueva
-    else:
-        print("Parámetro incorrecto...\nTerminando")
-        return nueva
-
-# Filtro imagen ruido
-def filtroRuido(imagen, nueva):
+# Filtro que coloca colores al azar entre el 1 y 255
+def filtroAzar(imagen, nueva):
     rgb = imagen.convert('RGB')
     pixels = nueva.load()
     for i in range(imagen.size[0]):
@@ -132,87 +105,8 @@ def filtroRuido(imagen, nueva):
             pixels[i,j] = (r,g,b)
     return nueva
 
-# Filtro imagen random
-# TODO
-def filtroRandom(imagen, nueva):
-    rgb = imagen.convert('RGB')
-    pixels = nueva.load()
-    for i in range(imagen.size[0]):
-        # randI = randrange(imagen.size[0])
-        for j in range(imagen.size[1]):
-            randI = randrange(imagen.size[0])
-            randJ = randrange(imagen.size[1])
-            r1,g1,b1 = rgb.getpixel((i,j))
-            rR,gR,bR = rgb.getpixel((randI,randJ))
-            pixels[i,j] = (rR,gR,bR)
-            pixels[randI, randJ] = (r1,g1,b1)
-    return nueva
-            
-# Filtro gris rojo
-def filtroGrisRojo(imagen, nueva):
-    rgb = imagen.convert('RGB')
-    pixels = nueva.load()
-    for i in range(imagen.size[0]):
-        for j in range(imagen.size[1]):
-            r,g,b = rgb.getpixel((i,j))
-            pixels[i,j] = (r,r,r)
-    return nueva
-
-# Filtro gris verde
-def filtroGrisVerde(imagen, nueva):
-    rgb = imagen.convert('RGB')
-    pixels = nueva.load()
-    for i in range(imagen.size[0]):
-        for j in range(imagen.size[1]):
-            r,g,b = rgb.getpixel((i,j))
-            pixels[i,j] = (g,g,g)
-    return nueva
-
-# Filtro gris azul
-def filtroGrisAzul(imagen, nueva):
-    rgb = imagen.convert('RGB')
-    pixels = nueva.load()
-    for i in range(imagen.size[0]):
-        for j in range(imagen.size[1]):
-            r,g,b = rgb.getpixel((i,j))
-            pixels[i,j] = (b,b,b)
-    return nueva
-
-# Filtro gris Rojo/Verde
-def filtroGrisRojoVerde(imagen, nueva):
-    rgb = imagen.convert('RGB')
-    pixels = nueva.load()
-    for i in range(imagen.size[0]):
-        for j in range(imagen.size[1]):
-            r,g,b = rgb.getpixel((i,j))
-            rg = int((r+g)/2)
-            pixels[i,j] = (rg,rg,rg)
-    return nueva
-
-# Filtro gris Rojo/Azul
-def filtroGrisRojoAzul(imagen, nueva):
-    rgb = imagen.convert('RGB')
-    pixels = nueva.load()
-    for i in range(imagen.size[0]):
-        for j in range(imagen.size[1]):
-            r,g,b = rgb.getpixel((i,j))
-            rb = int((r+b)/2)
-            pixels[i,j] = (rb,rb,rb)
-    return nueva
-
-# Filtro gris Verde/Azul
-def filtroGrisVerdeAzul(imagen, nueva):
-    rgb = imagen.convert('RGB')
-    pixels = nueva.load()
-    for i in range(imagen.size[0]):
-        for j in range(imagen.size[1]):
-            r,g,b = rgb.getpixel((i,j))
-            gb = int((g+b)/2)
-            pixels[i,j] = (gb,gb,gb)
-    return nueva
-
 # Filtro alto contraste
-# TODO: falta pasarla a tono de gris primero
+# TODO: ¿Escala de grises?
 def filtroAltoContraste(imagen, nueva):
     rgb = imagen.convert('RGB')
     pixels = nueva.load()
