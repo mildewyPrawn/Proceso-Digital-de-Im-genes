@@ -12,7 +12,7 @@ formats = [('image files', ('.png', '.jpg')),]
 # filters
 FILTERS = ['normal', 'mica roja','mica verde','mica azul','0.30r+0.59g+.011b',
            'r+g+b/3','max(r,g,b)','min(r,g,b)','max(r,g,b)+min(r,g,b)/2',
-           'azar','alto contraste','alto contraste inverso', 'desaturacion']
+           'azar','alto contraste','alto contraste inverso']
 
 img = None
 new = None
@@ -51,12 +51,16 @@ def applyFilter():
         photo = filtroMinRGB(img, new)
     if (name == 'max(r,g,b)+min(r,g,b)/2'):
         photo = filtroMinMaxProm(img, new)
+    if (name == 'azar'):
+        photo = filtroAzar(img, new)
+    if (name == 'alto contraste'):
+        photo = filtroAltoContraste(img, new)
+    if (name == 'alto contraste inverso'):
+        photo = filtroAltoContrasteInverso(img, new)
     tkimage = ImageTk.PhotoImage(photo)
     lbl = Label(root, image=tkimage)
     lbl.image = tkimage
     lbl.grid(row=0, column=0, columnspan=3)
-
-# TODO FALTA MOSTRAR LA IMAGEN CON EL FILTRO
 
 # quit button
 btn_quit = Button(root, text='Exit', command=root.quit)
