@@ -1,18 +1,27 @@
 # packages in environment at /home/emiliano/miniconda3/envs/pddi:
 #
 # Name                    Version                   Build  Channel
+blas                      1.0                         mkl    anaconda
 ca-certificates           2020.1.1                      0    anaconda
 certifi                   2019.11.28               py38_0    anaconda
 freetype                  2.9.1                h8a8886c_1    anaconda
+intel-openmp              2020.0                      166    anaconda
 jpeg                      9b                   habf39ab_1    anaconda
 ld_impl_linux-64          2.33.1               h53a641e_7    anaconda
 libedit                   3.1.20181209         hc058e9b_0    anaconda
 libffi                    3.2.1                h4deb6c0_3    anaconda
 libgcc-ng                 9.1.0                hdf63c60_0    anaconda
+libgfortran-ng            7.3.0                hdf63c60_0    anaconda
 libpng                    1.6.37               hbc83047_0    anaconda
 libstdcxx-ng              9.1.0                hdf63c60_0    anaconda
 libtiff                   4.1.0                h2733197_0    anaconda
+mkl                       2019.5                      281    anaconda
+mkl-service               2.3.0            py38he904b0f_0    anaconda
+mkl_fft                   1.0.15           py38ha843d7b_0    anaconda
+mkl_random                1.1.0            py38h962f231_0    anaconda
 ncurses                   6.1                  he6710b0_1    anaconda
+numpy                     1.18.1           py38h4f9e942_0    anaconda
+numpy-base                1.18.1           py38hde5b4d6_1    anaconda
 olefile                   0.46                       py_0    anaconda
 openssl                   1.1.1                h7b6447c_0    anaconda
 pillow                    7.0.0            py38hb39fc2d_0    anaconda
@@ -20,6 +29,7 @@ pip                       20.0.2                   py38_1    anaconda
 python                    3.8.1                h0371630_1    anaconda
 readline                  7.0                  h7b6447c_5    anaconda
 setuptools                45.1.0                   py38_0    anaconda
+six                       1.14.0                   py38_0    anaconda
 sqlite                    3.30.1               h7b6447c_0    anaconda
 tk                        8.6.8                hbc83047_0    anaconda
 wheel                     0.34.1                   py38_0    anaconda
