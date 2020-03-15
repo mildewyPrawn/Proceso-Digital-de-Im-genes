@@ -14,14 +14,19 @@ FILTERS = ['normal', 'mica roja','mica verde','mica azul','0.30r+0.59g+.011b',
            'r+g+b/3','max(r,g,b)','min(r,g,b)','max(r,g,b)+min(r,g,b)/2',
            'azar','alto contraste','alto contraste inverso',
            'Blur','Motion blur','Encontrar bordes','Sharpen','Emboss','Promedio',
-           'Mediano']
+           'Mediano',
+           'M color','M tonos de grises','MNH#Q...','MNH#Q...(color)',
+           'MNH#Q...(b/n)','Poner texto','Dominó Negro','Dominó Blanco','Naipes']
 
 img = None
 new = None
+name_img = ''
 
 '''Looks for an image'''
 def search():
     filename = askopenfilename(filetypes=formats)
+    global name_img
+    name_img = getName(str(filename))
     path = filename
     global img
     global new
@@ -33,6 +38,11 @@ def search():
     lbl.grid(row=0, column=0, columnspan=3)
     # TODO: si elige otra imagen, borrar todo lo anterior
     # TODO: cambiar los botones (StringVar) para elegir entre pŕácticas
+
+def getName(filename):
+    f = filename.split('/')
+    n = f[-1].split('.')
+    return n[0]
 
 def applyFilter():
     name = variable.get()
@@ -74,6 +84,29 @@ def applyFilter():
         photo = filtroPromedio(img, new)
     if (name == 'Mediano'):
         photo = filtroMediano(img, new)
+    if (name == 'M color'):
+        photo = img
+        filtroM(img, new, name_img)
+    if (name == 'M tonos de grises'):
+        photo = filtroFormula(img,new)
+        filtroM(photo, photo, name_img)
+    if (name == 'MNH#Q...'):
+        filtroMNHQ(img, new, 'mnhq_' + name_img)
+    if (name == 'MNH#Q...(b/n)'):
+        photo = filtroFormula(img,new)
+        filtroMNHQGris(photo, photo, 'mnhq_bn_' + name_img)
+    if (name == 'MNH#Q...(color)'):
+        photo = img
+        filtroMNHQColor(img, new, 'mnhq_color_' + name_img)
+    if (name == 'Naipes'):
+        photo = filtroFormula(img,new)
+        filtroNaipes(photo, photo, 'naipes_' + name_img)
+    if (name == 'Dominó Negro'):
+        photo = filtroFormula(img,new)
+        filtroDomino(photo, photo, 'domino_negro_' + name_img, 1)
+    if (name == 'Dominó Blanco'):
+        photo = filtroFormula(img,new)
+        filtroDomino(photo, photo, 'domino_blanco_' + name_img, 0)
     tkimage = ImageTk.PhotoImage(photo)
     lbl = Label(root, image=tkimage)
     lbl.image = tkimage
