@@ -12,7 +12,9 @@ formats = [('image files', ('.png', '.jpg')),]
 # filters
 FILTERS = ['normal', 'mica roja','mica verde','mica azul','0.30r+0.59g+.011b',
            'r+g+b/3','max(r,g,b)','min(r,g,b)','max(r,g,b)+min(r,g,b)/2',
-           'azar','alto contraste','alto contraste inverso']
+           'azar','alto contraste','alto contraste inverso',
+           'Blur','Motion blur','Encontrar bordes','Sharpen','Emboss','Promedio',
+           'Mediano']
 
 img = None
 new = None
@@ -30,6 +32,7 @@ def search():
     lbl.image = tkimage
     lbl.grid(row=0, column=0, columnspan=3)
     # TODO: si elige otra imagen, borrar todo lo anterior
+    # TODO: cambiar los botones (StringVar) para elegir entre pŕácticas
 
 def applyFilter():
     name = variable.get()
@@ -57,6 +60,20 @@ def applyFilter():
         photo = filtroAltoContraste(img, new)
     if (name == 'alto contraste inverso'):
         photo = filtroAltoContrasteInverso(img, new)
+    if (name == 'Blur'):
+        photo = filtroBlur(img, new)
+    if (name == 'Motion blur'):
+        photo = filtroMotionBlur(img, new)
+    if (name == 'Encontrar bordes'):
+        photo = filtroEncontrarBordes(img, new)
+    if (name == 'Sharpen'):
+        photo = filtroSharpen(img, new)
+    if (name == 'Emboss'):
+        photo = filtroEmboss(img, new)
+    if (name == 'Promedio'):
+        photo = filtroPromedio(img, new)
+    if (name == 'Mediano'):
+        photo = filtroMediano(img, new)
     tkimage = ImageTk.PhotoImage(photo)
     lbl = Label(root, image=tkimage)
     lbl.image = tkimage
