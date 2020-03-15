@@ -9,6 +9,14 @@ maxi = lambda x, y : max(x,y) # Nos da el máximo de dos elementos
 # Nos da la suma del mínimo y máximo de tres elementos
 minmaxprom = lambda x,y,z : (mini(x, mini(y, z)))+(maxi(x, maxi(y, z)))
 
+# abrir y cerrar líneas en HTML
+abreRGB = '<font size="1" style="color:rgb('
+cierraRGB = ');">M</font>'
+
+# fonts
+cards = "<PRE><style>@font-face{font-family: 'Playcrds';src: url('dominos-cartas_FILES/Playcrds.TTF') format('truetype');}font{font-family: 'Playcrds'}</style>"
+negro = "<PRE><style>@font-face{font-family: 'lasvbld_';src: url('dominos-cartas_FILES/lasvbld_.TTF') format('truetype');}font{font-family: 'lasvbld_'}</style>"
+blnco = "<PRE><style>@font-face{font-family: 'lasvwd__';src: url('dominos-cartas_FILES/lasvwd__.TTF') format('truetype');}font{font-family: 'lasvwd__'}</style>"
 
 # Filtro de mica roja
 def filtroMicaRoja(imagen, nueva):
@@ -252,3 +260,223 @@ def filtroMediano(imagen, nueva):
             vecindad.sort()
             nueva.putpixel((i,j),(vecindad[4]))
     return nueva
+
+def filtroM(imagen, nueva, nombre):
+    width = imagen.size[0]
+    height = imagen.size[1]
+    rgb = imagen.convert('RGB')
+    f = open(nombre + '.html', 'w')
+    for i in range(height):
+        for j in range(width):
+            r,g,b = rgb.getpixel((j,i))
+            f.write(abreRGB + str(r)+','+str(g)+','+str(b) + cierraRGB)
+        f.write('<br>')
+    f.close()
+
+def filtroMNHQ(imagen, nueva, nombre):
+    width = imagen.size[0]
+    height = imagen.size[1]
+    rgb = imagen.convert('RGB')
+    f = open(nombre + '.html', 'w')
+    f.write('<PRE>')
+    for i in range(height):
+        for j in range(width):
+            r,g,b = rgb.getpixel((j,i))
+            if(r >= 0 and r < 16):
+                f.write('<font size="1">M</font>')
+            elif(r >= 16 and r < 32):
+                f.write('<font size="1">N</font>')
+            elif(r >= 32 and r < 48):
+                f.write('<font size="1">H</font>')
+            elif(r >= 48 and r < 64):
+                f.write('<font size="1">#</font>')
+            elif(r >= 64 and r < 80):
+                f.write('<font size="1">Q</font>')
+            elif(r >= 80 and r < 96):
+                f.write('<font size="1">U</font>')
+            elif(r >= 96 and r < 112):
+                f.write('<font size="1">A</font>')
+            elif(r >= 112 and r < 128):
+                f.write('<font size="1">D</font>')
+            elif(r >= 128 and r < 144):
+                f.write('<font size="1">O</font>')
+            elif(r >= 144 and r < 160):
+                f.write('<font size="1">Y</font>')
+            elif(r >= 160 and r < 176):
+                f.write('<font size="1">2</font>')
+            elif(r >= 176 and r < 192):
+                f.write('<font size="1">$</font>')
+            elif(r >= 192 and r < 208):
+                f.write('<font size="1">%</font>')
+            elif(r >= 208 and r < 224):
+                f.write('<font size="1">+</font>')
+            elif(r >= 224 and r < 240):
+                f.write('<font size="1">-</font>')
+            elif(r >= 240 and r < 256):
+                f.write('<font size="1"> </font>')
+        f.write('<br>')
+    f.close()
+
+def filtroMNHQGris(imagen, nueva, nombre):
+    width = imagen.size[0]
+    height = imagen.size[1]
+    rgb = imagen.convert('RGB')
+    f = open(nombre + '.html', 'w')
+    f.write('<PRE>')
+    for i in range(height):
+        for j in range(width):
+            r,g,b = rgb.getpixel((j,i))
+            if(r >= 0 and r < 16):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">M</font>')
+            elif(r >= 16 and r < 32):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">N</font>')
+            elif(r >= 32 and r < 48):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">H</font>')
+            elif(r >= 48 and r < 64):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">#</font>')
+            elif(r >= 64 and r < 80):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">Q</font>')
+            elif(r >= 80 and r < 96):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">U</font>')
+            elif(r >= 96 and r < 112):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">A</font>')
+            elif(r >= 112 and r < 128):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">D</font>')
+            elif(r >= 128 and r < 144):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">O</font>')
+            elif(r >= 144 and r < 160):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">Y</font>')
+            elif(r >= 160 and r < 176):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">2</font>')
+            elif(r >= 176 and r < 192):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">$</font>')
+            elif(r >= 192 and r < 208):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">%</font>')
+            elif(r >= 208 and r < 224):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">+</font>')
+            elif(r >= 224 and r < 240):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">-</font>')
+            elif(r >= 240 and r < 256):
+                f.write(abreRGB +str(0)+','+str(0)+','+str(0)+','+');"> </font>')
+        f.write('<br>')
+    f.close()
+
+def filtroMNHQColor(imagen, nueva, nombre):
+    width = imagen.size[0]
+    height = imagen.size[1]
+    rgb = imagen.convert('RGB')
+    gris = filtroFormula(imagen,nueva)
+    widthG = gris.size[0]
+    heightG = gris.size[1]
+    rgbG = gris.convert('RGB')
+    f = open(nombre + '.html', 'w')
+    f.write('<PRE>')
+    for i in range(heightG):
+        for j in range(widthG):
+            r,g,b = rgb.getpixel((j,i))
+            rG,gG,bG = rgbG.getpixel((j,i))
+            if(rG >= 0 and rG < 16):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">M</font>')
+            elif(rG >= 16 and rG < 32):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">N</font>')
+            elif(rG >= 32 and rG < 48):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">H</font>')
+            elif(rG >= 48 and rG < 64):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">#</font>')
+            elif(rG >= 64 and rG < 80):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">Q</font>')
+            elif(rG >= 80 and rG < 96):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">U</font>')
+            elif(rG >= 96 and rG < 112):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">A</font>')
+            elif(rG >= 112 and rG < 128):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">D</font>')
+            elif(rG >= 128 and rG < 144):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">O</font>')
+            elif(rG >= 144 and rG < 160):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">Y</font>')
+            elif(rG >= 160 and rG < 176):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">2</font>')
+            elif(rG >= 176 and rG < 192):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">$</font>')
+            elif(rG >= 192 and rG < 208):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">%</font>')
+            elif(rG >= 208 and rG < 224):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">+</font>')
+            elif(rG >= 224 and rG < 240):
+                f.write(abreRGB+str(r)+','+str(g)+','+str(b)+');">-</font>')
+            elif(rG >= 240 and rG < 256):
+                f.write(abreRGB +str(0)+','+str(0)+','+str(0)+','+');"> </font>')
+        f.write('<br>')
+    f.close()
+
+def filtroNaipes(imagen, nueva, nombre):
+    width = imagen.size[0]
+    height = imagen.size[1]
+    rgb = imagen.convert('RGB')
+    f = open(nombre + '.html', 'w')
+    f.write(cards)
+    for i in range(height):
+        for j in range(width):
+            r,g,b = rgb.getpixel((j,i))
+            if(r >= 0 and r < 19):
+                f.write('<font size="1">A</font>')
+            elif(r >= 19 and r < 38):
+                f.write('<font size="1">B</font>')
+            elif(r >= 38 and r < 57):
+                f.write('<font size="1">C</font>')
+            elif(r >= 57 and r < 76):
+                f.write('<font size="1">D</font>')
+            elif(r >= 76 and r < 95):
+                f.write('<font size="1">E</font>')
+            elif(r >= 95 and r < 114):
+                f.write('<font size="1">F</font>')
+            elif(r >= 114 and r < 133):
+                f.write('<font size="1">G</font>')
+            elif(r >= 133 and r < 152):
+                f.write('<font size="1">H</font>')
+            elif(r >= 152 and r < 171):
+                f.write('<font size="1">I</font>')
+            elif(r >= 171 and r < 190):
+                f.write('<font size="1">J</font>')
+            elif(r >= 190 and r < 209):
+                f.write('<font size="1">K</font>')
+            elif(r >= 209 and r < 228):
+                f.write('<font size="1">L</font>')
+            elif(r >= 228 and r < 256):
+                f.write('<font size="1">M</font>')
+        f.write('<br>')
+    f.close()
+
+def filtroDomino(imagen, nueva, nombre, color):
+    current = negro if color == 1 else blnco
+    width = imagen.size[0]
+    height = imagen.size[1]
+    rgb = imagen.convert('RGB')
+    f = open(nombre + '.html', 'w')
+    f.write(current)
+    for i in range(height):
+        for j in range(width):
+            r,g,b = rgb.getpixel((j,i))
+            if(r >= 0 and r < 25):
+                f.write('<font size="1">0</font>')
+            elif(r >= 25 and r < 50):
+                f.write('<font size="1">1</font>')
+            elif(r >= 50 and r < 75):
+                f.write('<font size="1">2</font>')
+            elif(r >= 75 and r < 100):
+                f.write('<font size="1">3</font>')
+            elif(r >= 100 and r < 125):
+                f.write('<font size="1">4</font>')
+            elif(r >= 125 and r < 150):
+                f.write('<font size="1">5</font>')
+            elif(r >= 150 and r < 175):
+                f.write('<font size="1">6</font>')
+            elif(r >= 175 and r < 200):
+                f.write('<font size="1">7</font>')
+            elif(r >= 200 and r < 225):
+                f.write('<font size="1">8</font>')
+            elif(r >= 225 and r < 256):
+                f.write('<font size="1">9</font>')
+        f.write('<br>')
+    f.close()
