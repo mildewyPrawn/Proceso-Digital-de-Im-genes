@@ -1,4 +1,4 @@
-from PIL import Image
+from PIL import Image, ImageFont, ImageDraw
 from random import randrange
 import numpy as np
 
@@ -480,3 +480,31 @@ def filtroDomino(imagen, nueva, nombre, color):
                 f.write('<font size="1">9</font>')
         f.write('<br>')
     f.close()
+
+def marcaDeAgua(imagen, nueva, texto):
+    tSize = 50
+    tX = 10
+    tY = 30
+    font = 'dominos-cartas_FILES/From Cartoon Blocks.ttf'
+    return marcaDeAguaAux(imagen, texto, tSize, 400, 200, font)
+
+def marcaDeAguaAux(imagen, texto, size, tX, tY, font):
+    rgba = imagen.convert('RGBA')
+    tImage = Image.new('RGBA', rgba.size, (255,255,255,0))
+    font = ImageFont.truetype(font, size)
+    draw = ImageDraw.Draw(tImage)
+    draw.text((tX, tY), texto, font=font, fill=(255,0,0,255))
+    return Image.alpha_composite(rgba, tImage)
+
+def quitaMarca(imagen, nueva):
+    rgb = imagen.convert('RGB')
+    pixels = nueva.load()
+    for i in range(imagen.size[0]):
+        for j in range(imagen.size[1]):
+            r,g,b = rgb.getpixel((i,j))
+            if ((r - g) < 10):
+                pass
+            else:
+                prom = (int)((1.3475)*((r+g+b)/3))
+                pixels[i,j] = (prom, prom, prom)
+    return nueva

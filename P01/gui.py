@@ -3,6 +3,8 @@ from PIL import ImageTk, Image
 from tkinter import *
 from tkinter.filedialog import askopenfilename
 from filtros import *
+import tkinter as tk
+from tkinter import ttk
 
 root = Tk()
 root.title('Proceso Digital de Imágenes')
@@ -16,7 +18,8 @@ FILTERS = ['normal', 'mica roja','mica verde','mica azul','0.30r+0.59g+.011b',
            'Blur','Motion blur','Encontrar bordes','Sharpen','Emboss','Promedio',
            'Mediano',
            'M color','M tonos de grises','MNH#Q...','MNH#Q...(color)',
-           'MNH#Q...(b/n)','Poner texto','Dominó Negro','Dominó Blanco','Naipes']
+           'MNH#Q...(b/n)','Poner texto','Dominó Negro','Dominó Blanco','Naipes',
+           'Marca de Agua','Quitar Marca']
 
 img = None
 new = None
@@ -107,6 +110,11 @@ def applyFilter():
     if (name == 'Dominó Blanco'):
         photo = filtroFormula(img,new)
         filtroDomino(photo, photo, 'domino_blanco_' + name_img, 0)
+    if (name == 'Marca de Agua'):
+        txt = input('Ingresa un texto\n')
+        photo = marcaDeAgua(img, new, txt)
+    if (name == 'Quitar Marca'):
+        photo = quitaMarca(img, new)
     tkimage = ImageTk.PhotoImage(photo)
     lbl = Label(root, image=tkimage)
     lbl.image = tkimage
